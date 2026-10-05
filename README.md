@@ -130,6 +130,34 @@ The SwiftUI and Ponytail skills are attributed MIT dependencies. The bundled
 Ponytail skill is loaded by the workflow; it does not install Ponytail's separate
 persistent plugin hooks. See [third-party notices](THIRD_PARTY_NOTICES.md).
 
+## Optional: App Store screenshots
+
+The [App Store screenshots skill](addons/app-store-screenshots/SKILL.md) is in
+this repo as an optional add-on. The normal installer and plugin keep the core
+12 skills; install this one separately from your iOS Foundry checkout:
+
+```sh
+python3 scripts/setup.py install --addon app-store-screenshots
+```
+
+Then ask your agent:
+
+```text
+Use $app-store-screenshots to create marketing screenshots for my app.
+```
+
+It includes the screenshot editor template, device frames, style prompts, and
+copy guidance for App Store and Google Play assets. Installing the add-on copies
+the skill files only. Node.js 20.9+ and the editor's web dependencies are needed
+when the skill creates your screenshot project, not during the core install.
+
+Add `--project /path/to/MyApp` for a project-scoped installation. To remove just
+this add-on, preserving the core skills:
+
+```sh
+python3 scripts/setup.py uninstall --addon app-store-screenshots
+```
+
 ## Requirements
 
 - macOS with full Xcode, accepted Apple terms, and a compatible iOS simulator runtime.

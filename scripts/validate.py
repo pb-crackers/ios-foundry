@@ -7,7 +7,9 @@ import re
 
 ROOT = Path(__file__).resolve().parents[1]
 names = set()
-for folder in sorted((ROOT / "skills").iterdir()):
+core = sorted((ROOT / "skills").iterdir())
+addons = sorted((ROOT / "addons").iterdir())
+for folder in core + addons:
     entry = folder / "SKILL.md"
     text = entry.read_text()
     assert text.startswith("---\n"), entry
@@ -23,11 +25,17 @@ for folder in sorted((ROOT / "skills").iterdir()):
 for f in [ROOT / "plugin.json", ROOT / "mcp.json", ROOT / "sources.json",
           ROOT / ".agents/plugins/marketplace.json", ROOT / "examples/ios-foundry.json"]:
     json.loads(f.read_text())
-assert len(names) == 12
+assert len(core) == 12 and len(addons) == 1 and len(names) == 13
 assert json.loads((ROOT / "plugin.json").read_text())["license"] == "Apache-2.0"
 assert (ROOT / "LICENSE").is_file() and (ROOT / "NOTICE").is_file()
 for name in ["swiftui-pro", "swiftui-expert-skill", "ponytail"]:
     assert "MIT License" in (ROOT / "skills" / name / "LICENSE").read_text()
-for p in (ROOT / "skills").rglob("*"):
-    assert not p.is_symlink(), f"Non-portable symlink: {p}"
-print(f"Validated {len(names)} skills, references, licenses, scripts, and package metadata")
+addon = ROOT / "addons/app-store-screenshots"
+assert "MIT License" in (addon / "LICENSE").read_text()
+for required in ["template/package.json", "template/public/mockup.png", "style-prompts.md", "copy-ideas.md"]:
+    assert (addon / required).is_file(), f"Missing add-on resource: {required}"
+json.loads((addon / "template/package.json").read_text())
+for directory in [ROOT / "skills", ROOT / "addons"]:
+    for p in directory.rglob("*"):
+        assert not p.is_symlink(), f"Non-portable symlink: {p}"
+print(f"Validated {len(core)} core skills, {len(addons)} optional skill, references, licenses, and package metadata")

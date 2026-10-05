@@ -29,9 +29,26 @@ with contextlib.redirect_stdout(io.StringIO()), tempfile.TemporaryDirectory() as
     setup.install_skills(target, dry_run=True)
     assert not target.exists(), "Dry run wrote files"
     setup.install_skills(target)
+    assert not (target / "app-store-screenshots").exists(), "Default install included the optional skill"
     original = (target / setup.MANIFEST).read_bytes()
     setup.install_skills(target)
     assert (target / setup.MANIFEST).read_bytes() == original, "Repeat install changed ownership"
+    addon = setup.ROOT / "addons/app-store-screenshots"
+    setup.install_skills(target, dry_run=True, skill_dir=addon)
+    assert not (target / addon.name).exists(), "Optional dry run wrote files"
+    setup.install_skills(target, skill_dir=addon)
+    assert setup.hashes(target / addon.name) == setup.hashes(addon), "Optional install omitted template or assets"
+    setup.install_skills(target, skill_dir=addon)
+    setup.uninstall_skills(target, skill_name=addon.name)
+    assert not (target / addon.name).exists()
+    assert (target / "dev-workflow/SKILL.md").exists(), "Optional uninstall removed core skills"
+    addon_only = root / "addon-only"
+    command = [sys.executable, str(setup.ROOT / "scripts/setup.py"), "install",
+               "--addon", addon.name, "--skills-dir", str(addon_only)]
+    result = subprocess.run(command, capture_output=True, text=True)
+    assert result.returncode == 0, result.stderr
+    assert setup.hashes(addon_only / addon.name) == setup.hashes(addon)
+    assert not (addon_only / "dev-workflow").exists(), "Add-on command installed the core workflow"
     user_file = target / "dev-workflow/SKILL.md"
     user_file.write_text(user_file.read_text() + "\nUser edits\n")
     rejected(lambda: setup.install_skills(target))

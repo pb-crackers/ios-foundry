@@ -32,12 +32,13 @@ def hashes(directory):
     return result
 
 
-def install_skills(target, dry_run=False):
+def install_skills(target, dry_run=False, skill_dir=None):
     target = target.expanduser().resolve()
     marker = target / MANIFEST
     owned = json.loads(marker.read_text()) if marker.exists() else {}
     pending = []
-    for source in sorted((ROOT / "skills").iterdir()):
+    sources = [skill_dir] if skill_dir else sorted((ROOT / "skills").iterdir())
+    for source in sources:
         if not source.is_dir():
             continue
         dest = target / source.name
@@ -61,7 +62,7 @@ def install_skills(target, dry_run=False):
         print(f"COPY {source.name}")
 
 
-def uninstall_skills(target, dry_run=False):
+def uninstall_skills(target, dry_run=False, skill_name=None):
     target = target.expanduser().resolve()
     marker = target / MANIFEST
     if not marker.exists():
@@ -70,6 +71,8 @@ def uninstall_skills(target, dry_run=False):
     owned = json.loads(marker.read_text())
     removable = []
     for name, expected in owned.items():
+        if skill_name and name != skill_name:
+            continue
         if Path(name).name != name or name in (".", ".."):
             raise ValueError("Invalid installation ownership record")
         dest = target / name
@@ -82,7 +85,11 @@ def uninstall_skills(target, dry_run=False):
         if not dry_run:
             shutil.rmtree(dest)
     if not dry_run:
-        marker.unlink()
+        remaining = {name: value for name, value in owned.items() if skill_name and name != skill_name}
+        if remaining:
+            marker.write_text(json.dumps(remaining, indent=2) + "\n")
+        else:
+            marker.unlink()
 
 
 def mcp_probe():
@@ -234,6 +241,7 @@ def main():
     parser.add_argument("--download-runtime", action="store_true", help="download Apple's iOS runtime (large)")
     parser.add_argument("--skip-mcp", action="store_true", help="copy skills without changing Codex MCP config")
     parser.add_argument("--probe-mcp", action="store_true", help="make a read-only MCP call; may show Xcode approval")
+    parser.add_argument("--addon", choices=["app-store-screenshots"], help="install or uninstall only this optional skill")
     args = parser.parse_args()
     if sys.version_info < (3, 10):
         parser.error("Python 3.10+ required; install Python or rerun install.sh --install-tools")
@@ -241,12 +249,20 @@ def main():
         parser.error("Choose --project or --skills-dir")
     if args.project and not args.project.expanduser().is_dir():
         parser.error("--project must name an existing project directory")
+    if args.addon and (args.command == "doctor" or args.install_tools or args.download_runtime or args.probe_mcp):
+        parser.error("--addon installs skill files only; use tool setup and doctor separately")
     target = args.skills_dir or ((args.project / ".agents/skills") if args.project else Path.home() / ".agents/skills")
     if args.command == "doctor":
         return doctor(target.expanduser().resolve(), args.probe_mcp)
     if args.command == "uninstall":
-        uninstall_skills(target, args.dry_run)
+        uninstall_skills(target, args.dry_run, args.addon)
         print("Codex MCP configuration and project records are retained.")
+        return 0
+    if args.addon:
+        install_skills(target, args.dry_run, ROOT / "addons" / args.addon)
+        if not args.dry_run:
+            print("Optional skill installed. Restart the agent if needed and use $app-store-screenshots.")
+            print("The editor needs Node.js 20.9+; dependencies install when the skill scaffolds a screenshot project.")
         return 0
     if args.dry_run:
         install_skills(target, True)

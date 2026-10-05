@@ -9,6 +9,7 @@ licenses of the following bundled components.
 | `skills/swiftui-pro` | Paul Hudson — [SwiftUI-Agent-Skill](https://github.com/twostraws/SwiftUI-Agent-Skill) | [MIT](skills/swiftui-pro/LICENSE) |
 | `skills/swiftui-expert-skill` | Antoine van der Lee — [SwiftUI-Agent-Skill](https://github.com/AvdLee/SwiftUI-Agent-Skill) | [MIT](skills/swiftui-expert-skill/LICENSE) |
 | `skills/ponytail` | DietrichGebert — [Ponytail](https://github.com/DietrichGebert/ponytail), installed version 4.13.0 | [MIT](skills/ponytail/LICENSE) |
+| `addons/app-store-screenshots` | Parth Jadhav — [app-store-screenshots](https://github.com/ParthJadhav/app-store-screenshots) | [MIT](addons/app-store-screenshots/LICENSE) |
 
 These are snapshots copied from the author's installed skills on 2026-10-05,
 not downloads of an unpinned moving branch. Original entrypoint hashes are in
@@ -19,6 +20,13 @@ guidance and Instruments scripts are included; its entrypoint matches the topic
 coverage of the upstream skill checked during preparation. Both retain their
 MIT notices. Ponytail's host-specific argument-hint metadata was removed for
 Codex skill-validator compatibility; its instructions are retained. Logos and upstream plugin metadata were omitted.
+
+App Store screenshots is optional and excluded from core installation and the
+plugin's `skills/` directory. Its installed local snapshot includes the editor
+template, style prompts, copy guidance, and mockup assets. Its worktree advice
+was adapted to require an explicit user request. The upstream MIT license was
+verified at the commit recorded in `sources.json`, and a copy is included inside
+the template so scaffolded projects retain the notice.
 
 The workflow originated in Phillip Dougherty's personal configuration and was
 adapted for portable task storage, host-neutral delegation, Xcode integration,

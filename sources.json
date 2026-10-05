@@ -56,5 +56,13 @@
     "sha256_before_adaptation": "1316a2f3f95741d2300b116fe0c2d81ce4a9568656ed0a62643f54aaf09957f2",
     "license": "MIT",
     "snapshot": "local installed snapshot, 2026-10-05"
+  },
+  "app-store-screenshots": {
+    "origin": "https://github.com/ParthJadhav/app-store-screenshots",
+    "sha256_before_adaptation": "daf432ee37eb2881d8498eb7299136f07172d6b2c9a861879713cff82696b39a",
+    "license": "MIT",
+    "snapshot": "local installed snapshot, 2026-10-05",
+    "upstream_license_verified_at": "82d4ebba770ce821d89e27f6a5bd30a2cb65ab23",
+    "optional": true
   }
 }
