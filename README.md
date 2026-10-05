@@ -19,7 +19,7 @@ Clone this repository, then run:
 ```sh
 git clone https://github.com/pb-crackers/ios-foundry.git
 cd ios-foundry
-./install.sh --install-tools
+sh install.sh --install-tools
 python3 scripts/setup.py doctor --probe-mcp
 ```
 
@@ -32,7 +32,7 @@ imported. You still approve Xcode access and sign in to your agent yourself.
 For a project-only installation:
 
 ```sh
-./install.sh --project /path/to/MyApp --install-tools
+sh install.sh --project /path/to/MyApp --install-tools
 ```
 
 That creates `.agents/skills` and a small `.ios-foundry.json` in your project.
@@ -115,9 +115,9 @@ not a reason to raise your deployment target; verify availability in your SDK.
 ## Setup controls
 
 ```sh
-./install.sh --dry-run                    # inspect without changing settings
-./install.sh --skip-mcp                   # copy skills only
-./install.sh --download-runtime           # request Apple's large iOS runtime download
+sh install.sh --dry-run                    # inspect without changing settings
+sh install.sh --skip-mcp                   # copy skills only
+sh install.sh --download-runtime           # request Apple's large iOS runtime download
 python3 scripts/setup.py doctor           # check prerequisites and configuration
 python3 scripts/setup.py doctor --probe-mcp # also make a read-only Xcode call
 python3 scripts/setup.py uninstall        # remove only unchanged installer-owned copies
