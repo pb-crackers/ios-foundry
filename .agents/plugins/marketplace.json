@@ -1,0 +1,20 @@
+{
+  "name": "ios-foundry",
+  "interface": {
+    "displayName": "iOS Foundry"
+  },
+  "plugins": [
+    {
+      "name": "ios-foundry",
+      "source": {
+        "source": "local",
+        "path": "./"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Developer Tools"
+    }
+  ]
+}

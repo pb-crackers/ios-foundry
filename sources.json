@@ -1,0 +1,60 @@
+{
+  "dev-workflow": {
+    "origin": "Phillip Dougherty personal workflow",
+    "sha256_before_adaptation": "c75dbbf7d2c3b29022382b99731fb88d7679bba5b9cb7431874c5270b55f09fb",
+    "license": "Apache-2.0"
+  },
+  "capture-todo": {
+    "origin": "Phillip Dougherty personal workflow",
+    "sha256_before_adaptation": "39b6c60dac383b59297b6e522d07ce7bbcbc9ee5c70c730c7f2c6dcc001a4027",
+    "license": "Apache-2.0"
+  },
+  "discuss-feature": {
+    "origin": "Phillip Dougherty personal workflow",
+    "sha256_before_adaptation": "a12737426f6641b8b96f5c471ea925e1867c9ef80097bbec08cf12bdc173f3ed",
+    "license": "Apache-2.0"
+  },
+  "debug-feature": {
+    "origin": "Phillip Dougherty personal workflow",
+    "sha256_before_adaptation": "ba53ebda8da5a4bf35f2f55ed28d8b3f37c037aa1f146c5f7b396f3e6ffa6eb8",
+    "license": "Apache-2.0"
+  },
+  "plan-feature": {
+    "origin": "Phillip Dougherty personal workflow",
+    "sha256_before_adaptation": "759a45518a024a5e5f90ec5c82e05908102a34b160b1ded6f4286c95a7c24602",
+    "license": "Apache-2.0"
+  },
+  "build-feature": {
+    "origin": "Phillip Dougherty personal workflow",
+    "sha256_before_adaptation": "28bbed538d58ef7a5134a19599e03265785626c3ce4a4ebf702fdf36d5a40d94",
+    "license": "Apache-2.0"
+  },
+  "uat-feature": {
+    "origin": "Phillip Dougherty personal workflow",
+    "sha256_before_adaptation": "71e0f67a33e6da7fa647da7cd6141b94626acf2b3c2b4274909f0dfc3227e511",
+    "license": "Apache-2.0"
+  },
+  "ship-feature": {
+    "origin": "Phillip Dougherty personal workflow",
+    "sha256_before_adaptation": "53d2db3114b084105a829ecdcc835d4f0e8a6c1cb7fd27b6de8f3dc9745b9e8b",
+    "license": "Apache-2.0"
+  },
+  "swiftui-expert-skill": {
+    "origin": "https://github.com/AvdLee/SwiftUI-Agent-Skill",
+    "sha256_before_adaptation": "3b794f9cb46efb016eafcad2fcedce7127c74d60c50a949619e0bcd2bc38351f",
+    "license": "MIT",
+    "snapshot": "local installed snapshot, 2026-10-05"
+  },
+  "swiftui-pro": {
+    "origin": "https://github.com/twostraws/SwiftUI-Agent-Skill",
+    "sha256_before_adaptation": "8b58a171afc1dcf9c42d85414af2dc506c8c92bf2c77527adb4d52b884f4d715",
+    "license": "MIT",
+    "snapshot": "local installed snapshot, 2026-10-05"
+  },
+  "ponytail": {
+    "origin": "https://github.com/DietrichGebert/ponytail",
+    "sha256_before_adaptation": "1316a2f3f95741d2300b116fe0c2d81ce4a9568656ed0a62643f54aaf09957f2",
+    "license": "MIT",
+    "snapshot": "local installed snapshot, 2026-10-05"
+  }
+}

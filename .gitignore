@@ -1,0 +1,7 @@
+.DS_Store
+__pycache__/
+*.pyc
+.ios-foundry-install.json
+.ios-foundry.json
+.build/
+*.trace/

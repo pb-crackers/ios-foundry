@@ -1,0 +1,7 @@
+iOS Foundry
+Copyright 2026 Phillip Dougherty
+
+Original workflow, installer, documentation and integration: Apache-2.0.
+Third-party skills remain under their included MIT licenses.
+See THIRD_PARTY_NOTICES.md for attribution and provenance.
+Apple Xcode and its bundled skills are external dependencies, not redistributed.
