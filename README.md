@@ -44,6 +44,40 @@ open your project, and approve the intended agent/project folder when prompted.
 Read the [Xcode setup guide](skills/xcode-device-interaction/references/setup.md)
 for the background-server option and permission troubleshooting.
 
+### Or just hand this to your agent
+
+Copy this Markdown prompt into your coding agent:
+
+```markdown
+Set up iOS Foundry for my Codex development environment on this Mac:
+https://github.com/pb-crackers/ios-foundry
+
+1. Clone the repository with `git clone https://github.com/pb-crackers/ios-foundry.git`
+   into a new directory. If a checkout already exists, verify its origin and
+   preserve any local changes before updating it.
+2. Read `README.md`, `install.sh`, and `scripts/setup.py` before running setup.
+   Check the macOS, Python, Xcode, and simulator prerequisites. Help me resolve
+   missing prerequisites using the documented setup options.
+3. From the checkout, run `sh install.sh --dry-run`. Review conflicts, then run
+   `sh install.sh --install-tools` to install the skills and configure Xcode MCP.
+   Preserve existing skills and settings; stop and explain any conflict rather
+   than overwriting it. Use the default user-wide installation so my app
+   projects remain unchanged.
+4. Guide me through any required account sign-in and Xcode agent/project-folder
+   approvals using `skills/xcode-device-interaction/references/setup.md`.
+   Leave passwords, Apple agreements, and permission approvals to me.
+5. Run `python3 tests/check_setup.py` and `python3 scripts/validate.py`.
+   With my project open in Xcode and access approved, run
+   `python3 scripts/setup.py doctor --probe-mcp`.
+6. Report what was installed, which checks passed, and any remaining manual
+   steps. Distinguish a working MCP connection from an app's live simulator
+   smoke test. Tell me if I need to restart Codex to discover the skills.
+
+Use `gh` and `git` for GitHub operations. Do not change my app code, create
+worktrees, enable automatic merging, or claim setup succeeded while required
+checks are failing.
+```
+
 Restart your agent if newly installed skills do not appear, then try:
 
 ```text

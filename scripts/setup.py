@@ -264,7 +264,7 @@ def main():
         config = args.project.expanduser().resolve() / ".ios-foundry.json"
         if not config.exists():
             config.write_text((ROOT / "examples/ios-foundry.json").read_text())
-    print("Skill copies installed. Restart the agent if needed. Follow docs/xcode.md to approve Xcode access.")
+    print("Skill copies installed. Restart the agent if needed. Follow skills/xcode-device-interaction/references/setup.md to approve Xcode access.")
     return doctor(target.expanduser().resolve())
 
 
